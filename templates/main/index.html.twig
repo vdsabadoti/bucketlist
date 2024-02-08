@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home | {{ parent() }}{% endblock %}
+
+{% block body %}
+<main>
+    <div class="grid gap-y-10 grid-rows-3 grid-flow-col">
+
+        <div class="flex items-center justify-center pb-10">
+            <h2 class="text-4xl font-extrabold dark:text-white">Hello !</h2>
+        </div>
+        <div class="flex items-center justify-center">
+            <p>Welcome to Bucket-List. </p>
+        </div>
+        <div class="flex items-center justify-center pb-10">
+            {%  if test_var %}
+                <p>{{ test_var }}</p>
+            {%  endif %}
+        </div>
+    </div>
+
+</main>
+
+
+{% endblock %}
