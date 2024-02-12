@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\WishRepository;
+use App\Validator\WishValidator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields : ['title','author'], message: 'This wish already exists for this user', errorPath: 'title')]
+#[Assert\Callback([WishValidator::class, 'validate'])]
 class Wish
 {
     #[ORM\Id]
@@ -15,13 +20,19 @@ class Wish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message :'This field should not be blank')]
+    #[Assert\Length(min: 3, max: 30, minMessage: "At least 3 characters", maxMessage: "You must not exceed 30 characters")]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message :'You must type a description')]
+    #[Assert\Length(min: 10, max: 500, minMessage: "At least 10 characters", maxMessage: "You must not exceed 500 characters")]
     private ?string $description = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message :'The username required')]
+    #[Assert\Length(min: 5, max: 15, minMessage: "Invalid username (too short)", maxMessage: "Invalid username (too long)")]
     private ?string $author = null;
 
     #[ORM\Column]

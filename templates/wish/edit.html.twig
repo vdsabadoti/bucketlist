@@ -10,32 +10,29 @@
             <h2 class="text-4xl font-extrabold dark:text-white">Your wish</h2>
         </div>
 
-        <div class="flex items-center justify-center items-center">
+        <div class="flex justify-center">
                 {{ form_start(form) }}
 
-            <div class="flex items-center justify-center text-lg font-medium">
+            <div class="flex justify-center text-lg font-medium">
                 {{ form_label(form.title) }}
             </div>
                 {{ form_widget(form.title) }}
                 {{ form_errors(form.title) }}
 
-            <div class="flex items-center justify-center mt-5 text-lg font-medium">
+            <div class="flex justify-center mt-5 text-lg font-medium">
                 {{ form_label(form.description) }}
             </div>
                 {{ form_widget(form.description) }}
                 {{ form_errors(form.description) }}
 
-            <div class="flex items-center justify-center mt-5 text-lg font-medium">
+            <div class="flex justify-center mt-5 text-lg font-medium">
                 {{ form_label(form.author) }}
             </div>
                 {{ form_widget(form.author) }}
                 {{ form_errors(form.author) }}
 
-            <div class="flex items-center justify-center mt-5 text-lg font-medium">
-                {{ form_label(form.isPublished) }}
-            </div>
-            <div class="flex items-center justify-center mt-5 text-lg font-medium">
-                {{ form_widget(form.isPublished) }}
+            <div class="flex justify-center mt-5 text-sm font-medium">
+                {{ form_label(form.isPublished) }}&nbsp;&nbsp;&nbsp;{{ form_widget(form.isPublished) }}
             </div>
             {{ form_errors(form.isPublished) }}
             <br>
