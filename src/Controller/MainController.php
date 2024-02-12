@@ -20,6 +20,7 @@ class MainController extends AbstractController
     {
         $year = date_create('2024-02-05');
         $year = date_format($year, 'Y');
+        dump($year);
         return $this->render('main/index.html.twig', [
             'test_var' => "What a lovely background colour isn't it ?",
         ]);
