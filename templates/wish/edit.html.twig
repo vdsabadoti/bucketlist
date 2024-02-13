@@ -31,10 +31,31 @@
                 {{ form_widget(form.author) }}
                 {{ form_errors(form.author) }}
 
+            {% if form.vars.value.image != null %}
+            <div class="flex justify-center mt-5 text-lg font-medium">
+                <p>Image</p>
+            </div>
+                <div class="flex justify-center mt-5 text-lg font-medium">
+                <img src="{{ asset(pictures_dir ~ '/' ~ fileName) }}" alt="Logo" width="200" height="350">
+            </div>
+                <div class="flex justify-center mt-5 text-sm font-medium">
+                    {{ form_label(form.shouldDelete) }}&nbsp;&nbsp;&nbsp;{{ form_widget(form.shouldDelete) }}
+                </div>
+                {{ form_errors(form.shouldDelete) }}
+            {% endif %}
+
+
+            <div class="flex justify-center mt-5 text-lg font-medium">
+                {{ form_label(form.image_file) }}
+            </div>
+            {{ form_widget(form.image_file) }}
+            {{ form_errors(form.image_file) }}
+
             <div class="flex justify-center mt-5 text-sm font-medium">
                 {{ form_label(form.isPublished) }}&nbsp;&nbsp;&nbsp;{{ form_widget(form.isPublished) }}
             </div>
             {{ form_errors(form.isPublished) }}
+
             <br>
             <div class="flex items-center justify-center mt-5 mb-10 text-lg font-medium">
                 <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-black bg-black hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 rounded-lg border border-black text-base dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>

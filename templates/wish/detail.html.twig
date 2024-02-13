@@ -4,7 +4,13 @@
 
 {% block body %}
 <main>
-    <div class="grid gap-y-10 grid-rows-4 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="grid gap-y-10 grid-rows-5 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+        {% if wish.image != null %}
+        <div class="flex items-center justify-center pt-8">
+        <img src="{{ asset(pictures_dir ~ '/' ~ wish.image) }}" alt="Image" width="500" height="600">
+        </div>
+        {% endif %}
 
         <div class="flex items-center justify-center pt-8">
             <h2 class="text-4xl font-extrabold dark:text-white">{{ wish.title }}</h2>
