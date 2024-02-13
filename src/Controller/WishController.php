@@ -31,7 +31,17 @@ class WishController extends AbstractController
         return $this->render('wish/detail.html.twig', [
             'wish' => $wish
         ]);
-    }#[Route('/edit/{id}', name: 'app_edit', requirements: ['id' => '\d+'], defaults: ['id' => 0])]
+    }
+    #[Route('/delete/{id}', name: 'app_delete', requirements: ['id' => '\d+'])]
+    public function delete(Wish $wish, WishRepository $wishRepository, EntityManagerInterface $em): Response
+    {
+
+        $em->remove($wish);
+        $em->flush();
+        return $this->redirectToRoute('app_wishes');
+
+    }
+    #[Route('/edit/{id}', name: 'app_edit', requirements: ['id' => '\d+'], defaults: ['id' => 0])]
     public function create(int $id, Request $request, EntityManagerInterface $em, WishRepository $wishRepository, SluggerInterface $slugger): Response
     {
         ///FORM CONSTRUCTION
