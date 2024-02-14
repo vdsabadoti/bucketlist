@@ -5,28 +5,41 @@
 {% block body %}
 <main>
 
-    <div class="grid gap-y-10 grid-rows-2 grid-flow-col space-y-4">
+    <div class="grid gap-y-10 grid-rows-3 grid-flow-col space-y-4">
 
         <div class="flex items-center justify-center pb-10">
             <h2 class="text-4xl font-extrabold dark:text-white">Wishes</h2>
         </div>
 
+        <div class="flex items-center justify-center pb-10">
+            <div class="flex items-center justify-center w-48 text-lg font-medium text-gray-900 bg-white ">
+                <form action="{{ path('app_wishes') }}">
+                <label for="categories" >Pick a category</label>
+                <select id="categories" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="0" selected>All</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.label }}</option>
+                    {% endfor %}
+                </select>
+                    <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-black bg-black hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 rounded-lg border border-black text-base dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
+                </form>
+            </div>
+        </div>
 
+
+        {% if wishes %}
         <div class="flex items-center justify-center">
             <div class="w-48 text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 {% for wish in wishes|sort((a, b) => b.dateCreated <=> a.dateCreated) %}
                 <a href="{{ path('app_detail', {'id' : wish.id }) }}" class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                    {{ wish.title }} | {{ wish.category.label }}
+                    {{ wish.title }}
                 </a>
                 {% endfor %}
             </div>
         </div>
+        {%  endif %}
 
     </div>
-
-
-
-
 
 </main>
 {% endblock %}

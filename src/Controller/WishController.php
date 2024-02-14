@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -12,16 +14,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use function PHPUnit\Framework\isNull;
 
 class WishController extends AbstractController
 {
     #[Route('/wishes', name: 'app_wishes')]
-    public function list(WishRepository $wishRepository): Response
+    public function list(Request $request, WishRepository $wishRepository, CategoryRepository $categoryRepository): Response
     {
-        $wishes = $wishRepository->findAll();
+        $categories = $categoryRepository->findAll();
+        $cat = $request->get('category');
+
+        if ($cat != 0){
+            $wishes = $wishRepository->findByCategory($cat);
+        } else {
+            $wishes = $wishRepository->findAll();
+        }
+
         return $this->render('wish/list.html.twig', [
-            'wishes' => $wishes
+            'wishes' => $wishes,
+            'categories' => $categories
         ]);
     }
 
