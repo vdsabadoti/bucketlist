@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Wish;
+use App\Form\CategoryType;
 use App\Form\WishType;
 use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class WishController extends AbstractController
@@ -22,6 +24,10 @@ class WishController extends AbstractController
     {
         $categories = $categoryRepository->findAll();
         $cat = $request->get('category');
+
+        if ($cat == 99){
+            return $this->redirectToRoute('app_create_category');
+        }
 
         if ($cat != 0){
             $wishes = $wishRepository->findByCategory($cat);
@@ -33,6 +39,30 @@ class WishController extends AbstractController
             'wishes' => $wishes,
             'categories' => $categories
         ]);
+    }
+
+    #[Route('/category', name: 'app_create_category')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function newCategory(Request $request, EntityManagerInterface $em): Response
+    {
+        $category = new Category();
+
+        $form = $this->createForm(CategoryType::class, $category);
+
+        //GET DATA FROM REQUEST
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($category);
+            $em->flush();
+
+            return $this->redirectToRoute('app_wishes');
+        }
+
+        return $this->render('wish/category.html.twig', [
+            'form' => $form
+        ]);
+
     }
 
     #[Route('/detail/{id}', name: 'app_detail', requirements: ['id' => '\d+'], defaults: ['id' => 15])]

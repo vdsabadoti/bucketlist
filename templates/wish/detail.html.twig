@@ -32,12 +32,14 @@
         </div>
 
         <div class="flex items-center justify-center pb-8">
+            {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_delete', {'id' : wish.id }) }}">
                 <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-900 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</button>
             </a>
             <a href="{{ path('app_edit', {'id' : wish.id }) }}">
                 <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Modify</button>
             </a>
+            {% endif %}
         </div>
 
     </div>

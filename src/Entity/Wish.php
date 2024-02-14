@@ -48,6 +48,7 @@ class Wish
     private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'Wish')]
+    #[Assert\NotBlank(message :'You must pick a category')]
     private ?Category $category = null;
 
     public function getId(): ?int

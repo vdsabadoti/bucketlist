@@ -49,10 +49,13 @@ class WishType extends AbstractType
             ->add('author', TextType::class, [
                 'label' => 'Your username',
                 'attr' => ['class' => 'text-lg font-medium bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'],
-                'required' => false])
+                'required' => false
+                ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'label',
+                'placeholder' => 'Pick a category',
+                'required' => 'true',
                 'attr' => ['class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500']
             ])
             ->add('isPublished', CheckboxType::class, [

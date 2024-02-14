@@ -5,7 +5,7 @@
 {% block body %}
 <main>
 
-    <div class="grid gap-y-10 grid-rows-3 grid-flow-col space-y-4">
+    <div class="grid gap-y-10 grid-rows-4 grid-flow-col space-y-4">
 
         <div class="flex items-center justify-center pb-10">
             <h2 class="text-4xl font-extrabold dark:text-white">Wishes</h2>
@@ -20,12 +20,12 @@
                     {% for category in categories %}
                         <option value="{{ category.id }}">{{ category.label }}</option>
                     {% endfor %}
+                    <option value="99">Do you need a new one ?</option>
                 </select>
                     <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-black bg-black hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 rounded-lg border border-black text-base dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
-                </form>
+                 </form>
             </div>
         </div>
-
 
         {% if wishes %}
         <div class="flex items-center justify-center">
@@ -40,6 +40,7 @@
         {%  endif %}
 
     </div>
+
 
 </main>
 {% endblock %}

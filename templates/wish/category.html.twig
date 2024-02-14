@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wish manager | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="grid gap-y-10 grid-rows-2 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-10">
+
+        <div class="flex items-center justify-center pb-10 mt-5">
+            <h2 class="text-4xl font-extrabold dark:text-white">New category</h2>
+        </div>
+
+        <div class="flex justify-center">
+            <div class="flex justify-center text-lg font-medium">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

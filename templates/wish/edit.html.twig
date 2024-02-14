@@ -6,8 +6,11 @@
 
     <div class="grid gap-y-10 grid-rows-4 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-        <div class="flex items-center justify-center pb-10 mt-5">
+        <div class="flex items-center justify-center mt-5">
             <h2 class="text-4xl font-extrabold dark:text-white">Your wish</h2>
+        </div>
+        <div class="flex items-center justify-center pb-10">
+            <p class="text-sm dark:text-white">You are logged in as {{ app.user.userIdentifier }}</p>
         </div>
 
         <div class="flex justify-center">
