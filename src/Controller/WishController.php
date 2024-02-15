@@ -88,7 +88,7 @@ class WishController extends AbstractController
         //INIT VARIABLES
         $wish = new Wish();
         $update = false;
-        $fileName = '';
+        $fileName = $fileNameForForm = null;
         $deleteImageFromWish = false;
 
         //VERIFY IF IN CREATION OR UPDATE MODE
@@ -105,7 +105,7 @@ class WishController extends AbstractController
 
         //IF UPDATE MODE, GET FILENAME OF IMAGE
         if ($update) {
-            $fileName = $form->get('image')->getViewData();
+            $fileNameForForm = $form->get('image')->getViewData();
             if ($form->get('shouldDelete')->getNormData()){
                 $deleteImageFromWish = true;
             }
@@ -146,7 +146,7 @@ class WishController extends AbstractController
         return $this->render('wish/edit.html.twig', [
             'form' => $form,
             'update' => $update,
-            'fileName' => $fileName
+            'fileName' => $fileNameForForm
         ]);
     }
 }
