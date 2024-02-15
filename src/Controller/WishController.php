@@ -8,6 +8,7 @@ use App\Form\CategoryType;
 use App\Form\WishType;
 use App\Repository\CategoryRepository;
 use App\Repository\WishRepository;
+use App\Services\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +83,7 @@ class WishController extends AbstractController
 
     }
     #[Route('/edit/{id}', name: 'app_edit', requirements: ['id' => '\d+'], defaults: ['id' => 0])]
-    public function create(int $id, Request $request, EntityManagerInterface $em, WishRepository $wishRepository, SluggerInterface $slugger): Response
+    public function create(int $id, Censurator $censurator, Request $request, EntityManagerInterface $em, WishRepository $wishRepository, SluggerInterface $slugger): Response
     {
         ///FORM CONSTRUCTION
         //INIT VARIABLES
@@ -135,6 +136,11 @@ class WishController extends AbstractController
 
             //UPDATE IMAGE
             $wish->setImage($fileName);
+
+            $wish->setTitle($censurator->purify($wish->getTitle()));
+            $wish->setDescription($censurator->purify($wish->getDescription()));
+
+            //TODO CENSURATOR
 
             $em->persist($wish);
             $em->flush();
