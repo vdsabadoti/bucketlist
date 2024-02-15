@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="grid gap-y-10 grid-rows-2 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-5 pt-8">
+<div class="grid gap-y-10 grid-rows-3 grid-flow-col border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-5 pt-8">
     <div class="flex items-center justify-center">
         <form method="post">
         {% if error %}
@@ -26,16 +26,16 @@
 
 
 
-        <div class="flex items-center justify-center pb-10 pt-10">
+        <div class="pb-10 pt-10">
             <h2 class="text-4xl font-extrabold dark:text-white">Please sign in</h2>
         </div>
-        <div class="flex justify-center text-lg font-medium">
+        <div class="text-lg font-medium">
             <label for="inputEmail">Email</label>
         </div>
         <div class="flex items-center justify-center">
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="text-lg font-medium bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="email" required autofocus>
         </div>
-        <div class="flex justify-center text-lg font-medium">
+        <div class="text-lg font-medium mt-4">
             <label for="inputPassword">Password</label>
         </div>
         <div class="flex items-center justify-center">
@@ -44,7 +44,7 @@
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >
-            <div class="flex justify-center text-lg font-medium mt-2">
+            <div class="text-lg font-medium mt-2">
                 <input type="checkbox" name="_remember_me" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="remember">
                 <label for="remember">Remember me</label>
             </div>
@@ -54,7 +54,11 @@
             </button>
         </div>
         </form>
-
+    </div>
+    <div class="flex items-center justify-center text-lg text-red-600 font-medium mt-2 mb-2">
+        <a href="{{ path('app_forgot_password_request') }}">
+            Forgot password
+        </a>
     </div>
 </div>
 {% endblock %}
